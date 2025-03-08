@@ -1,0 +1,27 @@
+
+[
+    {
+      "_id": "652b1c4f1a2b3c4d5e6f7g8",
+      "firstName": "John",
+      "lastName": "Doe",
+      "email": "john.doe@example.com",
+      "favoriteColor": "Blue",
+      "birthday": "1990-01-01T00:00:00.000Z"
+    },
+    {
+      "_id": "652b1c4f1a2b3c4d5e6f7g9",
+      "firstName": "Jane",
+      "lastName": "Smith",
+      "email": "jane.smith@example.com",
+      "favoriteColor": "Green",
+      "birthday": "1985-05-15T00:00:00.000Z"
+    },
+    {
+        "_id": "652b1c4f1a2b3c4d5e6f7g9",
+      "firstName": "Jane",
+      "lastName": "Smith",
+      "email": "jane.smith@example.com",
+      "favoriteColor": "Green",
+      "birthday": "1985-05-15T00:00:00.000Z"
+    }
+  ]
