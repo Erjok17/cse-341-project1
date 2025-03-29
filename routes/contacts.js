@@ -1,14 +1,12 @@
 const express = require('express');
 const router = express.Router();
-const mongodb = require('../data/database');
 const contactsController = require('../controllers/contacts');
 
-
-// Contact routes
-router.get('/', contactsController.getAll);
-router.get('/:id', contactsController.getSingle);
-router.post('/', contactsController.createContact);
-router.put('/:id', contactsController.updateContact);
-router.delete('/:id', contactsController.deleteContact);
+// Use full paths including /contacts prefix
+router.get('/contacts', contactsController.getAll);
+router.post('/contacts', contactsController.createContact);
+router.get('/contacts/:id', contactsController.getSingle);
+router.put('/contacts/:id', contactsController.updateContact);
+router.delete('/contacts/:id', contactsController.deleteContact);
 
 module.exports = router;

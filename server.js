@@ -30,7 +30,8 @@ mongodb.initDb((err) => {
     console.log("Connected to MongoDB successfully");
     
     // Routes (moved outside initDb callback to avoid duplication)
-    app.use('/', require('./routes'));
+    app.use(require('./routes')); // index.js routes
+    app.use(require('./routes/contacts')); // contacts.js routes
     
     // Start server with Render-compatible settings
     app.listen(port, '0.0.0.0', () => {

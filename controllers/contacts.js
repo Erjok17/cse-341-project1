@@ -2,6 +2,7 @@ const mongodb = require('../data/database');
 const { ObjectId } = require('mongodb');
 
 const getAll = async (req, res) => {
+  //Swagger.tags-['Users']
   try {
     const db = mongodb.getDb(); // Get the database instance
     const result = await db.collection('contacts').find().toArray();
@@ -14,6 +15,7 @@ const getAll = async (req, res) => {
 };
 
 const getSingle = async (req, res) => {
+   //Swagger.tags-['Users']
   try {
     const db = mongodb.getDb(); // Get the database instance
     const contactId = new ObjectId(req.params.id);
@@ -31,6 +33,7 @@ const getSingle = async (req, res) => {
 };
 
 const createContact = async (req, res) => {
+   //Swagger.tags-['Users']
   try {
     const db = mongodb.getDb();
     const contact = {
@@ -53,6 +56,7 @@ const createContact = async (req, res) => {
 };
 
 const updateContact = async (req, res) => {
+   //Swagger.tags-['Users']
   try {
     const db = mongodb.getDb();
     const contactId = new ObjectId(req.params.id);
@@ -76,6 +80,7 @@ const updateContact = async (req, res) => {
 };
 
 const deleteContact = async (req, res) => {
+   //Swagger.tags-['Users']
   try {
     const db = mongodb.getDb();
     const contactId = new ObjectId(req.params.id);
