@@ -5,7 +5,7 @@
     "description": "Contacts API Documentation",
     "version": "1.0.0"
   },
-  "host": "project1-k5yo.onrender.com",
+  "host": "localhost:3000",
   "basePath": "/",
   "tags": [
     {
@@ -14,6 +14,7 @@
     }
   ],
   "schemes": [
+    "http",
     "https"
   ],
   "securityDefinitions": {
