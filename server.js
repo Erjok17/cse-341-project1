@@ -9,19 +9,19 @@ const port = process.env.PORT || 3000;
 // Middleware
 app.use(bodyParser.json());
 app.use((req, res, next) => {
-  res.setHeader('Access-Control-Allow-Origin', '*');  
+  res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader(
     'Access-Control-Allow-Headers',
-    'Origin, X-Requested-With, Content-Type, Accept, Z-Key'
+    'Origin, X-Requested-With, Content-Type, Accept, Z-Key, Authorization'
   );
-  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
-  
+  res.setHeader(
+    'Access-Control-Allow-Methods', 
+    'GET, POST, PUT, DELETE, PATCH, OPTIONS'
+  );
   next();
 });
 
-app.use('/', require('./routes')); 
-
-// Initialize DB before starting server
+// Initialize DB and start server
 mongodb.initDb((err) => {
   if (err) {
     console.error("Database initialization failed:", err);
@@ -29,12 +29,12 @@ mongodb.initDb((err) => {
   } else {
     console.log("Connected to MongoDB successfully");
     
-    // Routes
+    // Routes (moved outside initDb callback to avoid duplication)
     app.use('/', require('./routes'));
     
-    // Start server
-    app.listen(port, () => {
-      console.log(`Server running on http://localhost:${port}`);
+    // Start server with Render-compatible settings
+    app.listen(port, '0.0.0.0', () => {
+      console.log(`Server is running on port ${port}`);
     });
   }
 });
