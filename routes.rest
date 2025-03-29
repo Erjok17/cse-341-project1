@@ -1,0 +1,44 @@
+# Test GET all contacts
+GET http://localhost:3000/contacts
+Accept: application/json
+
+###
+
+# Test GET contact by ID
+GET http://localhost:3000/contacts/67cc8c1c0aec148172598c65
+Accept: application/json
+
+###
+
+# Test POST to create a contact
+POST http://localhost:3000/contacts
+Content-Type: application/json
+
+{
+  "firstName": "diggy",
+  "lastName": "Doop",
+  "email": "doop@example.com",
+  "favoriteColor": "yellow",
+  "birthday": "1990-05-10"
+}
+
+
+###
+
+# Test PUT to update a contact
+PUT http://localhost:3000/contacts/
+Content-Type: application/json
+
+{
+  "firstName": "daggy",
+  "lastName": "Doop",
+  "email": "doop@gmail.com",
+  "favoriteColor": "red",
+  "birthday": "1985-08-15"
+}
+
+
+###
+
+# Test DELETE a contact by ID
+DELETE http://localhost:3000/contacts/

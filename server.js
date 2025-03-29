@@ -1,33 +1,40 @@
+require('dotenv').config();
 const express = require('express');
-const mongoose = require('mongoose');
-const dotenv = require('dotenv');
+const bodyParser = require('body-parser');
+const mongodb = require('./data/database');
 
-// Load environment variables
-dotenv.config();
-
-// Initialize Express
 const app = express();
 const port = process.env.PORT || 3000;
 
-// Connect to MongoDB
-mongoose.connect(process.env.MONGODB_URI)
-  .then(() => console.log('Connected to MongoDB'))
-  .catch(err => console.error('Could not connect to MongoDB', err));
-// Middleware to parse JSON
-app.use(express.json());
-
-// Import routes
-const contactsRouter = require('./routes/contacts');
-
-// Use routes
-app.use('/contacts', contactsRouter);
-
-// Basic route
-app.get('/', (req, res) => {
-  res.send('Hello World');
+// Middleware
+app.use(bodyParser.json());
+app.use((req, res, next) => {
+  res.setHeader('Access-Control-Allow-Origin', '*');  
+  res.setHeader(
+    'Access-Control-Allow-Headers',
+    'Origin, X-Requested-With, Content-Type, Accept, Z-Key'
+  );
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+  
+  next();
 });
 
-// Start the server
-app.listen(port, () => {
-  console.log(`Server running on port ${port}`);
+app.use('/', require('./routes')); 
+
+// Initialize DB before starting server
+mongodb.initDb((err) => {
+  if (err) {
+    console.error("Database initialization failed:", err);
+    process.exit(1);
+  } else {
+    console.log("Connected to MongoDB successfully");
+    
+    // Routes
+    app.use('/', require('./routes'));
+    
+    // Start server
+    app.listen(port, () => {
+      console.log(`Server running on http://localhost:${port}`);
+    });
+  }
 });
