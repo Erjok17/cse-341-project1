@@ -2,32 +2,49 @@ const swaggerAutogen = require('swagger-autogen')();
 
 const doc = {
   info: {
-    title: 'Contacts Api',
+    title: 'Contacts API',
     description: 'Contacts API Documentation',
     version: '1.0.0'
   },
   host: 'localhost:3000',
   schemes: ['http', 'https'],
   basePath: '/',
-  consumes: ['application/json'],
-  produces: ['application/json'],
-  tags: [  // (Optional) Group endpoints by tags
-    { name: 'Contacts', description: 'Contact-related endpoints' }
+  tags: [
+    { 
+      name: 'Hello World',  // New tag for root endpoint
+      description: 'Welcome message' 
+    },
+    { 
+      name: 'Contacts', 
+      description: 'Contact-related endpoints' 
+    }
   ],
-  securityDefinitions: {  // (Optional) Define auth methods
-    BearerAuth: {
-      type: 'apiKey',
-      name: 'Authorization',
-      in: 'header',
-      description: 'JWT Token'
+  paths: {  // Manually add the root endpoint
+    '/': {
+      get: {
+        tags: ['Hello World'],
+        summary: 'Root endpoint',
+        responses: {
+          200: {
+            description: 'Returns Hello World message',
+            content: {
+              'text/plain': {
+                schema: {
+                  type: 'string',
+                  example: 'Hello World! - The Contacts API is running'
+                }
+              }
+            }
+          }
+        }
+      }
     }
   }
 };
 
 const outputFile = './swagger.json';
-const endpointFiles = ['./routes/contacts.js'];  // Path to my route files
+const endpointFiles = ['./routes/contacts.js'];  // Keep only contacts.js
 
-// Generate swagger.json
 swaggerAutogen(outputFile, endpointFiles, doc).then(() => {
   console.log('Swagger documentation generated successfully!');
 });
